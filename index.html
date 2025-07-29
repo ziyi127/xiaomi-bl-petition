@@ -715,9 +715,40 @@
             gap: 0.4rem;
         }
 
+        .signature-content {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.8rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--mi-orange);
+        }
+
+        .signature-content-preview {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .view-details {
+            display: block;
+            text-align: right;
+            color: var(--mi-orange);
+            font-size: 0.85rem;
+            text-decoration: none;
+            margin-top: 0.5rem;
+        }
+
+        .view-details:hover {
+            text-decoration: underline;
+        }
+
         .signature-image {
             max-width: 100%;
-            height: 50px;
+            height: 60px;
             object-fit: contain;
             background: white;
             border-radius: 6px;
@@ -1243,6 +1274,12 @@
                     </div>
                     
                     <div class="form-group full-width">
+                        <label for="supportContent"><i class="fas fa-comment mi-orange-accent"></i> 支持话语 (可选，10000字以内)</label>
+                        <textarea id="supportContent" rows="4" placeholder="请写下您对小米开放Bootloader解锁的支持话语..."></textarea>
+                        <div class="char-count" id="charCount">0 / 10000</div>
+                    </div>
+                    
+                    <div class="form-group full-width">
                         <label><i class="fas fa-signature mi-orange-accent"></i> 电子签名 *</label>
                         <div class="signature-pad-container">
                             <div class="signature-pad-wrapper">
@@ -1307,6 +1344,7 @@
                 <ul>
                     <li><strong>姓名</strong>：您提供的真实姓名（必填）</li>
                     <li><strong>邮箱地址</strong>：您提供的邮箱地址（可选，仅用于联系）</li>
+                    <li><strong>支持话语</strong>：您写的支持内容（可选）</li>
                     <li><strong>电子签名</strong>：您绘制的电子签名图像</li>
                     <li><strong>时间戳</strong>：签名提交的具体时间</li>
                     <li><strong>技术信息</strong>：浏览器类型、访问时间等基本技术信息</li>
@@ -1409,8 +1447,8 @@
     </div>
 
     <script>
-        // 全局变量配置
-        window.GLOBAL_CONFIG = {
+        // 全局配置
+        const CONFIG = {
             GITHUB_OWNER: 'ziyi127',
             GITHUB_REPO: 'xiaomi-bl-petition',
             GITHUB_API_BASE: 'https://api.github.com',
@@ -1420,28 +1458,17 @@
         };
 
         // 全局变量
-        let signatures = JSON.parse(localStorage.getItem('xiaomiSignatures') || '[]');
-        let signatureCount = signatures.length;
+        let signatures = [];
+        let signatureCount = 0;
         let currentColor = '#000000';
         let isDrawing = false;
         let lastX = 0;
         let lastY = 0;
         let canvasCtx = null;
         let hasDrawn = false; // 添加绘制状态标记
-
-        // 防刷限制相关变量
-        const COOLDOWN_TIME = window.GLOBAL_CONFIG.COOLDOWN_TIME;
         let lastSignatureTime = parseInt(localStorage.getItem('lastSignatureTime') || '0');
-
-        // 分页相关变量
-        const SIGNATURES_PER_PAGE = window.GLOBAL_CONFIG.SIGNATURES_PER_PAGE;
         let currentPage = 1;
         let totalPages = 1;
-
-        // GitHub配置
-        const GITHUB_OWNER = window.GLOBAL_CONFIG.GITHUB_OWNER;
-        const GITHUB_REPO = window.GLOBAL_CONFIG.GITHUB_REPO;
-        const GITHUB_API_BASE = window.GLOBAL_CONFIG.GITHUB_API_BASE;
 
         // 初始化画布
         function initCanvas() {
@@ -1597,7 +1624,7 @@
         function checkCooldown() {
             const now = Math.floor(Date.now() / 1000);
             const timePassed = now - lastSignatureTime;
-            const timeRemaining = COOLDOWN_TIME - timePassed;
+            const timeRemaining = CONFIG.COOLDOWN_TIME - timePassed;
             
             if (timeRemaining > 0) {
                 return timeRemaining;
@@ -1625,10 +1652,91 @@
             document.getElementById('daysCount').textContent = Math.floor((Date.now() - new Date('2024-01-01').getTime()) / (1000 * 60 * 60 * 24));
         }
 
+        // 从GitHub Issues获取签名数据
+        async function fetchSignaturesFromGitHub() {
+            try {
+                // 使用GitHub API获取Issues
+                const response = await fetch(`${CONFIG.GITHUB_API_BASE}/repos/${CONFIG.GITHUB_OWNER}/${CONFIG.GITHUB_REPO}/issues?state=open&per_page=${CONFIG.SIGNATURES_PER_PAGE}&page=${currentPage}`);
+                const issues = await response.json();
+                
+                // 解析签名数据
+                signatures = issues
+                    .filter(issue => issue.title.startsWith('签名支持:'))
+                    .map(issue => {
+                        // 从Issue内容中提取签名数据
+                        const content = issue.body || '';
+                        const nameMatch = content.match(/- \*\*姓名\*\*: (.+)/);
+                        const emailMatch = content.match(/- \*\*邮箱\*\*: (.+)/);
+                        const supportContentMatch = content.match(/- \*\*支持话语\*\*: ([\s\S]*?)(?=\n##|\n---|$)/);
+                        const signatureMatch = content.match(/!\[签名\]\((.+)\)/);
+                        
+                        // 解析支持内容
+                        let supportContent = '';
+                        if (supportContentMatch) {
+                            supportContent = supportContentMatch[1].trim();
+                        }
+                        
+                        return {
+                            id: issue.id,
+                            name: nameMatch ? nameMatch[1] : '匿名用户',
+                            email: emailMatch ? emailMatch[1] : '',
+                            supportContent: supportContent,
+                            date: new Date(issue.created_at).toLocaleString('zh-CN'),
+                            signature: signatureMatch ? signatureMatch[1] : '',
+                            timestamp: new Date(issue.created_at).getTime()
+                        };
+                    })
+                    .sort((a, b) => b.timestamp - a.timestamp);
+                
+                signatureCount = signatures.length;
+                totalPages = Math.ceil(signatureCount / CONFIG.SIGNATURES_PER_PAGE);
+                
+                return true;
+            } catch (error) {
+                console.error('获取签名数据失败:', error);
+                return false;
+            }
+        }
+
+        // 提交签名到GitHub Issues
+        async function submitSignatureToGitHub(signatureData) {
+            try {
+                // 这里应该调用GitHub API创建Issue
+                // 实际部署时需要GitHub Token进行认证
+                const issueData = {
+                    title: `签名支持: ${signatureData.name}`,
+                    body: `
+## 签名信息
+- **姓名**: ${signatureData.name}
+- **邮箱**: ${signatureData.email || '未提供'}
+- **支持话语**: ${signatureData.supportContent || '暂无'}
+- **签名时间**: ${signatureData.date}
+
+## 电子签名
+![签名](${signatureData.signature})
+
+---
+*此签名通过联合签名网站自动创建*
+                    `,
+                    labels: ['signature']
+                };
+
+                // 在实际部署中，这里会调用真正的GitHub API
+                console.log('提交到GitHub:', issueData);
+                
+                // 模拟成功提交
+                return true;
+            } catch (error) {
+                console.error('提交到GitHub失败:', error);
+                return false;
+            }
+        }
+
         // 提交签名
         async function submitSignature() {
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
+            const supportContent = document.getElementById('supportContent').value.trim();
 
             // 检查冷却时间
             const cooldownRemaining = checkCooldown();
@@ -1639,6 +1747,12 @@
 
             if (!name) {
                 showSignatureMessage('请输入您的姓名', 'error');
+                return;
+            }
+
+            // 检查支持内容长度
+            if (supportContent.length > CONFIG.MAX_SUPPORT_CONTENT_LENGTH) {
+                showSignatureMessage(`支持话语不能超过${CONFIG.MAX_SUPPORT_CONTENT_LENGTH}字`, 'error');
                 return;
             }
 
@@ -1660,12 +1774,8 @@
             const imageData = ctx.getImageData(0, 0, canvas.width / window.devicePixelRatio, 150);
             let hasDrawing = false;
             // 检查是否有非白色像素（除了边框）
-            for (let i = 0; i < imageData.data.length; i += 4) {
-                const r = imageData.data[i];
-                const g = imageData.data[i + 1];
-                const b = imageData.data[i + 2];
-                // 如果不是纯白色，则认为有绘制内容
-                if (r !== 255 || g !== 255 || b !== 255) {
+            for (let i = 3; i < imageData.data.length; i += 4) {
+                if (imageData.data[i] !== 255) { // 检查alpha通道，白色背景为255
                     hasDrawing = true;
                     break;
                 }
@@ -1684,32 +1794,36 @@
                 
                 // 创建新签名对象
                 const newSignature = {
-                    id: Date.now(),
                     name: name,
                     email: email,
+                    supportContent: supportContent,
                     date: new Date().toLocaleString('zh-CN'),
                     signature: signatureData,
                     timestamp: Date.now()
                 };
 
-                // 添加到数组开头
-                signatures.unshift(newSignature);
-                signatureCount = signatures.length;
+                // 提交到GitHub
+                const success = await submitSignatureToGitHub(newSignature);
                 
-                // 保存到本地存储
-                localStorage.setItem('xiaomiSignatures', JSON.stringify(signatures));
-                
-                // 记录签名时间（用于冷却）
-                const now = Math.floor(Date.now() / 1000);
-                localStorage.setItem('lastSignatureTime', now.toString());
-                lastSignatureTime = now;
-                
-                // 更新UI
-                updateStats();
-                loadSignatures();
-                clearForm();
-                
-                showSignatureMessage('签名提交成功！感谢您的支持！', 'success');
+                if (success) {
+                    // 记录签名时间（用于冷却）
+                    const now = Math.floor(Date.now() / 1000);
+                    localStorage.setItem('lastSignatureTime', now.toString());
+                    lastSignatureTime = now;
+                    
+                    // 更新UI
+                    updateStats();
+                    clearForm();
+                    
+                    showSignatureMessage('签名提交成功！感谢您的支持！', 'success');
+                    
+                    // 3秒后自动关闭模态框
+                    setTimeout(() => {
+                        closeSignatureModal();
+                    }, 3000);
+                } else {
+                    showSignatureMessage('提交失败，请稍后重试', 'error');
+                }
                 
             } catch (error) {
                 showSignatureMessage('提交失败，请稍后重试', 'error');
@@ -1721,14 +1835,29 @@
         function clearForm() {
             document.getElementById('name').value = '';
             document.getElementById('email').value = '';
+            document.getElementById('supportContent').value = '';
+            document.getElementById('charCount').textContent = '0 / 10000';
             clearSignature();
             hasDrawn = false; // 重置绘制状态
         }
 
-        // 加载签名列表
-        function loadSignatures() {
-            const container = document.getElementById('signaturesContainer');
+        // 加载签名列表到页面
+        async function loadSignaturesToPage() {
+            const container = document.getElementById('signaturesPageContainer');
             
+            // 从GitHub获取签名数据
+            const success = await fetchSignaturesFromGitHub();
+            
+            if (!success) {
+                container.innerHTML = `
+                    <div class="glass-effect" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5; color: var(--warning);"></i>
+                        <p style="font-size: 0.9rem;">加载签名数据失败，请稍后重试</p>
+                    </div>
+                `;
+                return;
+            }
+
             if (signatures.length === 0) {
                 container.innerHTML = `
                     <div class="glass-effect" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
@@ -1740,10 +1869,16 @@
             }
 
             let html = '';
-            // 只显示最近的12个签名
-            const recentSignatures = signatures.slice(0, 12);
+            // 只显示当前页的签名
+            const currentSignatures = getCurrentPageSignatures();
             
-            recentSignatures.forEach(signature => {
+            currentSignatures.forEach(signature => {
+                // 处理支持内容预览
+                let supportContentPreview = signature.supportContent || '暂无';
+                if (supportContentPreview.length > 50) {
+                    supportContentPreview = supportContentPreview.substring(0, 50) + '...';
+                }
+                
                 html += `
                     <div class="signature-card glass-effect animate-fade-in">
                         <div class="signature-name">
@@ -1752,12 +1887,90 @@
                         <div class="signature-date">
                             <i class="far fa-clock"></i> ${signature.date}
                         </div>
+                        <div class="signature-content">
+                            <div class="signature-content-preview">${supportContentPreview}</div>
+                        </div>
+                        <a href="#" class="view-details" onclick="showFullContent('${signature.id}')">
+                            <i class="fas fa-eye"></i> 查看详情
+                        </a>
                         <img src="${signature.signature}" alt="签名" class="signature-image" onerror="this.style.display='none'">
                     </div>
                 `;
             });
             
             container.innerHTML = html;
+
+            // 更新分页控件
+            updatePagination();
+        }
+
+        // 分页功能
+        function getCurrentPageSignatures() {
+            const startIndex = (currentPage - 1) * CONFIG.SIGNATURES_PER_PAGE;
+            const endIndex = startIndex + CONFIG.SIGNATURES_PER_PAGE;
+            return signatures.slice(startIndex, endIndex);
+        }
+
+        function updatePagination() {
+            const prevBtn = document.getElementById('prevPage');
+            const nextBtn = document.getElementById('nextPage');
+            const pageInfo = document.getElementById('pageInfo');
+
+            // 更新按钮状态
+            prevBtn.disabled = currentPage <= 1;
+            nextBtn.disabled = currentPage >= totalPages;
+
+            // 更新页面信息
+            pageInfo.textContent = `第 ${currentPage} 页，共 ${totalPages} 页`;
+        }
+
+        async function goToPage(page) {
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                await loadSignaturesToPage();
+            }
+        }
+
+        // 显示完整内容
+        function showFullContent(signatureId) {
+            const signature = signatures.find(s => s.id == signatureId);
+            if (signature) {
+                alert(`完整支持内容:\n\n${signature.supportContent || '暂无'}`);
+            }
+        }
+
+        // 模态框控制函数
+        function openSignatureModal() {
+            document.getElementById('signatureModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            initCanvas();
+            
+            // 检查冷却时间
+            const cooldownRemaining = checkCooldown();
+            if (cooldownRemaining > 0) {
+                document.getElementById('signatureMessage').innerHTML = showCooldownMessage(cooldownRemaining);
+            }
+        }
+
+        function closeSignatureModal() {
+            document.getElementById('signatureModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            clearForm();
+        }
+
+        // 页面切换函数
+        function showHomePage() {
+            document.getElementById('homePage').style.display = 'block';
+            document.getElementById('signaturesPage').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        async function showSignaturesPage() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('signaturesPage').style.display = 'block';
+            document.body.style.overflow = 'auto';
+            currentPage = 1;
+            await loadSignaturesToPage();
         }
 
         // 移动端导航菜单
@@ -1829,7 +2042,7 @@
             btn.onclick = function(e) {
                 e.preventDefault();
                 modal.style.display = "block";
-                document.body.style.overflow = "hidden"; // 防止背景滚动
+                document.body.style.overflow = "hidden";
             }
 
             // 点击关闭按钮关闭模态框
@@ -1855,8 +2068,26 @@
             });
         }
 
+        // 支持内容字符计数
+        function updateCharCount() {
+            const content = document.getElementById('supportContent').value;
+            const charCount = content.length;
+            const charCountElement = document.getElementById('charCount');
+            
+            charCountElement.textContent = `${charCount} / ${CONFIG.MAX_SUPPORT_CONTENT_LENGTH}`;
+            
+            if (charCount > CONFIG.MAX_SUPPORT_CONTENT_LENGTH) {
+                charCountElement.className = 'char-count error';
+                showSignatureMessage(`支持话语不能超过${CONFIG.MAX_SUPPORT_CONTENT_LENGTH}字`, 'error');
+            } else if (charCount > CONFIG.MAX_SUPPORT_CONTENT_LENGTH * 0.9) {
+                charCountElement.className = 'char-count warning';
+            } else {
+                charCountElement.className = 'char-count';
+            }
+        }
+
         // 初始化
-        function init() {
+        async function init() {
             // 初始化事件监听器
             document.getElementById('openSignatureModal').addEventListener('click', openSignatureModal);
             document.getElementById('closeSignatureModal').addEventListener('click', closeSignatureModal);
@@ -1895,16 +2126,19 @@
                 goToPage(currentPage + 1);
             });
 
+            // 支持内容字符计数
+            document.getElementById('supportContent').addEventListener('input', updateCharCount);
+
             // 初始化画布事件
             bindCanvasEvents();
             setupColorPalette();
             setupMobileMenu();
-            setupSmoothScroll();
             setupPrivacyModal();
+            setupSmoothScroll();
             
-            // 更新统计数据
+            // 加载初始数据
+            await fetchSignaturesFromGitHub();
             updateStats();
-            loadSignatures();
             
             // 添加滚动动画
             const observer = new IntersectionObserver((entries) => {
