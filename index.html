@@ -14,25 +14,25 @@
         }
 
         :root {
-            --mi-orange: #ff6900;
-            --mi-orange-dark: #e55e00;
-            --mi-orange-light: #ff8c42;
-            --mi-blue: #00c3ff;
-            --mi-gray: #f5f5f5;
+            --mi-orange: #ff7b2e;
+            --mi-orange-dark: #e66f29;
+            --mi-orange-light: #ffa05c;
+            --mi-blue: #33ccff;
+            --mi-gray: #f8f9fa;
             --dark-bg: #0a0a0f;
-            --card-bg: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: #e0e0e0;
+            --card-bg: rgba(255, 255, 255, 0.2);
+            --text-primary: #333333;
+            --text-secondary: #666666;
             --success: #4caf50;
             --warning: #ff9800;
             --error: #f44336;
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background: linear-gradient(135deg, #e0eafc, #cfdef3, #dfe9f3);
             color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.6;
@@ -81,7 +81,7 @@
             z-index: 1000;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            background: rgba(10, 10, 15, 0.8);
+            background: rgba(255, 255, 255, 0.3);
             border-bottom: 1px solid var(--glass-border);
             height: 60px;
         }
@@ -130,12 +130,12 @@
 
         .nav-links a:hover {
             color: var(--mi-orange);
-            background: rgba(255, 105, 0, 0.1);
+            background: rgba(255, 123, 46, 0.1);
         }
 
         .nav-links a.active {
             color: var(--mi-orange);
-            background: rgba(255, 105, 0, 0.15);
+            background: rgba(255, 123, 46, 0.15);
         }
 
         /* 移动端导航菜单 */
@@ -144,7 +144,7 @@
             top: 60px;
             left: 0;
             right: 0;
-            background: rgba(10, 10, 15, 0.95);
+            background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
@@ -171,12 +171,12 @@
 
         .mobile-menu .nav-links a:hover {
             color: var(--mi-orange);
-            background: rgba(255, 105, 0, 0.1);
+            background: rgba(255, 123, 46, 0.1);
         }
 
         .mobile-menu .nav-links a.active {
             color: var(--mi-orange);
-            background: rgba(255, 105, 0, 0.15);
+            background: rgba(255, 123, 46, 0.15);
         }
 
         /* 主要内容区域 */
@@ -233,7 +233,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 105, 0, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 123, 46, 0.1), transparent);
             transition: left 0.5s;
         }
 
@@ -282,7 +282,7 @@
             border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(255, 105, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 123, 46, 0.3);
             display: inline-flex;
             align-items: center;
             gap: 0.8rem;
@@ -292,7 +292,7 @@
 
         .signature-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255, 105, 0, 0.4);
+            box-shadow: 0 15px 35px rgba(255, 123, 46, 0.4);
         }
 
         .signature-btn:active {
@@ -313,7 +313,7 @@
         }
 
         .signature-modal-content {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
             margin: 5% auto;
             padding: 2rem;
             border-radius: 20px;
@@ -321,8 +321,8 @@
             max-width: 700px;
             max-height: 90vh;
             overflow-y: auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
             position: relative;
         }
 
@@ -332,7 +332,7 @@
             align-items: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .modal-title {
@@ -361,7 +361,7 @@
 
         .close-modal:hover {
             color: var(--mi-orange);
-            background: rgba(255, 105, 0, 0.1);
+            background: rgba(255, 123, 46, 0.1);
         }
 
         /* 签名表单 */
@@ -417,7 +417,7 @@
         input, textarea {
             width: 100%;
             padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.3);
             border: 1px solid var(--glass-border);
             border-radius: 12px;
             color: var(--text-primary);
@@ -428,8 +428,8 @@
         input:focus, textarea:focus {
             outline: none;
             border-color: var(--mi-orange);
-            background: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 0 0 2px rgba(255, 105, 0, 0.2);
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 0 3px rgba(255, 123, 46, 0.2);
         }
 
         input::placeholder, textarea::placeholder {
@@ -439,7 +439,7 @@
 
         /* 设备支持列表 */
         .device-list {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             padding: 1rem;
             margin: 1rem 0;
@@ -454,7 +454,7 @@
             align-items: center;
             padding: 0.5rem;
             margin: 0.5rem 0;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 8px;
         }
 
@@ -465,7 +465,7 @@
 
         .remove-device {
             background: rgba(244, 67, 54, 0.2);
-            color: #ffcdd2;
+            color: #f44336;
             border: none;
             padding: 0.3rem 0.6rem;
             border-radius: 6px;
@@ -479,7 +479,7 @@
         }
 
         .add-device-btn {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             color: var(--text-primary);
             border: 1px solid var(--glass-border);
             padding: 0.5rem 1rem;
@@ -494,13 +494,13 @@
         }
 
         .add-device-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.4);
             border-color: var(--mi-orange);
         }
 
         /* 签名板 */
         .signature-pad-container {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 12px;
             padding: 0.8rem;
             margin: 0.8rem 0;
@@ -581,18 +581,18 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 105, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 123, 46, 0.3);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             color: var(--text-primary);
             border: 1px solid var(--glass-border);
             min-width: 100px;
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.4);
             border-color: var(--mi-orange);
         }
 
@@ -616,26 +616,26 @@
         .message.success {
             background: rgba(76, 175, 80, 0.2);
             border: 1px solid rgba(76, 175, 80, 0.3);
-            color: #a5d6a7;
+            color: #4caf50;
         }
 
         .message.error {
             background: rgba(244, 67, 54, 0.2);
             border: 1px solid rgba(244, 67, 54, 0.3);
-            color: #ffcdd2;
+            color: #f44336;
         }
 
         .message.info {
             background: rgba(33, 150, 243, 0.2);
             border: 1px solid rgba(33, 150, 243, 0.3);
-            color: #bbdefb;
+            color: #2196f3;
         }
 
         /* 防刷提示 */
         .cooldown-message {
             background: rgba(255, 152, 0, 0.2);
             border: 1px solid rgba(255, 152, 0, 0.3);
-            color: #ffe082;
+            color: #ff9800;
             padding: 1rem;
             border-radius: 12px;
             margin: 1rem 0;
@@ -677,7 +677,7 @@
         }
 
         .pagination-btn {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             color: var(--text-primary);
             border: 1px solid var(--glass-border);
             padding: 0.5rem 1rem;
@@ -687,7 +687,7 @@
         }
 
         .pagination-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.4);
             border-color: var(--mi-orange);
         }
 
@@ -712,7 +712,7 @@
         }
 
         .back-btn {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             color: var(--text-primary);
             border: 1px solid var(--glass-border);
             padding: 0.8rem 2rem;
@@ -724,7 +724,7 @@
         }
 
         .back-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.4);
             border-color: var(--mi-orange);
         }
 
@@ -764,7 +764,7 @@
 
         .signature-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
         .signature-name {
@@ -778,27 +778,27 @@
         }
 
         .signature-date {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             display: flex;
             align-items: center;
             gap: 0.4rem;
         }
 
         .signature-devices {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             padding: 0.5rem;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 6px;
             border-left: 3px solid var(--mi-orange);
         }
 
         .device-tag {
             display: inline-block;
-            background: rgba(255, 105, 0, 0.2);
+            background: rgba(255, 123, 46, 0.2);
             color: var(--mi-orange);
             padding: 0.2rem 0.5rem;
             border-radius: 12px;
@@ -812,7 +812,7 @@
             object-fit: contain;
             background: white;
             border-radius: 6px;
-            padding: 5px;
+            padding: 3px;
             border: 1px solid var(--glass-border);
         }
 
@@ -821,16 +821,17 @@
             text-align: center;
             padding: 2rem;
             color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
         .spinner {
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid var(--mi-orange);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-top: 2px solid var(--mi-orange);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
+            margin: 0 auto 0.8rem;
         }
 
         @keyframes spin {
@@ -845,12 +846,13 @@
             color: var(--text-secondary);
             border-top: 1px solid var(--glass-border);
             margin-top: 2rem;
+            font-size: 0.9rem;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1rem;
             margin: 1rem 0;
             flex-wrap: wrap;
         }
@@ -861,7 +863,8 @@
             transition: color 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.3rem;
+            font-size: 0.85rem;
         }
 
         .footer-links a:hover {
@@ -870,7 +873,7 @@
 
         /* GitHub项目信息 */
         .github-info {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             padding: 1rem;
             margin: 1rem 0;
@@ -895,12 +898,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
         }
 
         .mi-logo {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--mi-orange);
         }
@@ -908,6 +911,8 @@
         .mi-tagline {
             color: var(--text-secondary);
             font-style: italic;
+            font-size: 0.9rem;
+            text-align: center;
         }
 
         /* 背景装饰 */
@@ -919,21 +924,21 @@
         }
 
         .mi-circle {
-            width: 200px;
-            height: 200px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             background: var(--mi-orange);
-            filter: blur(60px);
+            filter: blur(40px);
         }
 
         .mi-circle-1 {
             top: 10%;
-            left: 10%;
+            left: 5%;
         }
 
         .mi-circle-2 {
-            bottom: 20%;
-            right: 10%;
+            bottom: 15%;
+            right: 5%;
             background: var(--mi-blue);
         }
 
@@ -941,26 +946,26 @@
         .privacy-modal {
             display: none;
             position: fixed;
-            z-index: 3000;
+            z-index: 2000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
         }
 
         .privacy-modal-content {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
             margin: 5% auto;
             padding: 2rem;
             border-radius: 20px;
             width: 90%;
-            max-width: 800px;
+            max-width: 600px;
             max-height: 80vh;
             overflow-y: auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         }
 
         .privacy-modal-header {
@@ -969,11 +974,11 @@
             align-items: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .privacy-modal-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--mi-orange);
             margin: 0;
@@ -998,7 +1003,7 @@
 
         .privacy-close:hover {
             color: var(--mi-orange);
-            background: rgba(255, 105, 0, 0.1);
+            background: rgba(255, 123, 46, 0.1);
         }
 
         .privacy-modal-body {
@@ -1008,7 +1013,7 @@
         .privacy-modal-body h3 {
             color: var(--mi-orange);
             margin: 1.5rem 0 1rem 0;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         .privacy-modal-body p {
@@ -1027,104 +1032,91 @@
         }
 
         /* 响应式设计 */
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .hero-title {
-                font-size: 2rem;
+                font-size: 2.8rem;
             }
             
             .hero-subtitle {
-                font-size: 1rem;
+                font-size: 1.2rem;
+                max-width: 700px;
+                margin-left: auto;
+                margin-right: auto;
             }
             
             .form-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
             }
             
             .nav-toggle {
-                display: block;
+                display: none;
             }
             
-            .nav-links {
+            .mobile-menu {
                 display: none;
             }
             
             .main-content {
-                padding: 100px 3% 30px;
+                padding: 90px 5% 40px;
             }
             
             .form-container {
-                padding: 1.5rem;
+                padding: 2rem;
             }
             
             .signature-pad {
-                height: 120px;
+                height: 200px;
             }
             
             .signature-controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .color-palette {
-                margin-right: 0;
-                margin-bottom: 1rem;
+                flex-wrap: nowrap;
             }
             
             .btn {
-                width: 100%;
-                margin: 0.5rem 0;
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
             }
             
             .stat-number {
-                font-size: 1.8rem;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 1.8rem;
-            }
-            
-            .stat-card {
-                padding: 1rem;
-            }
-            
-            .stat-number {
-                font-size: 1.5rem;
-            }
-            
-            .signature-btn {
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
-            }
-            
-            .modal-title {
-                font-size: 1.3rem;
+                font-size: 2.5rem;
             }
             
             .section-title {
-                font-size: 1.3rem;
+                font-size: 2rem;
             }
             
             .page-title {
-                font-size: 1.5rem;
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 3.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .stats-container {
+                gap: 1.5rem;
+            }
+            
+            .stat-card {
+                padding: 2rem;
+            }
+            
+            .stat-icon {
+                font-size: 2.5rem;
+            }
+            
+            .stat-number {
+                font-size: 3rem;
             }
             
             .signature-pad {
-                height: 100px;
-            }
-            
-            .privacy-modal-title {
-                font-size: 1.5rem;
-            }
-            
-            .privacy-modal-body h3 {
-                font-size: 1.1rem;
+                height: 200px;
             }
         }
 
@@ -1132,7 +1124,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -1167,13 +1159,13 @@
                 transform: none;
             }
             
+            .signature-card:hover::before {
+                transform: scaleX(0);
+            }
+            
             .signature-card:hover {
                 transform: none;
                 box-shadow: none;
-            }
-            
-            .signature-card:hover::before {
-                transform: scaleX(0);
             }
             
             .signature-card:hover::before {
@@ -1184,8 +1176,8 @@
         /* 高对比度模式支持 */
         @media (prefers-contrast: high) {
             .glass-effect {
-                border: 2px solid white;
-                background: rgba(0, 0, 0, 0.8);
+                border: 2px solid black;
+                background: rgba(255, 255, 255, 0.8);
             }
             
             .signature-btn, .btn-primary {
@@ -1293,7 +1285,7 @@
     <!-- 签名列表页面 -->
     <div class="signatures-page" id="signaturesPage">
         <div class="page-header">
-            <h1 class="page-title animate-fade-in">签名支持者列表</h1>
+            <h1 class="page-title">签名支持者列表</h1>
             <p class="hero-subtitle">以下是支持小米Bootloader开放倡议的签名者</p>
         </div>
 
@@ -1404,7 +1396,7 @@
                 <i class="fab fa-github"></i> 项目名称: Xiaomi BL Petition
             </a>
         </div>
-        <p style="font-size: 0.9rem; margin-top: 1rem;">
+        <p style="font-size: 0.8rem; margin-top: 0.8rem;">
             本平台旨在促进开源社区发展，所有签名将被妥善保管并用于正式倡议活动。
         </p>
     </footer>
@@ -1519,7 +1511,7 @@
                     <li><strong>法律义务</strong>：遵守相关法律法规</li>
                 </ul>
 
-                <p style="margin-top: 2rem; font-style: italic; color: var(--text-secondary); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                <p style="margin-top: 2rem; font-style: italic; color: var(--text-secondary); border-top: 1px solid var(--glass-border); padding-top: 1rem;">
                     生效日期: 2025年7月29日<br>
                     最后更新: 2025年7月29日
                 </p>
@@ -1548,11 +1540,6 @@
         const SIGNATURES_PER_PAGE = 64;
         let currentPage = 1;
         let totalPages = 1;
-
-        // GitHub配置
-        const GITHUB_OWNER = 'ziyi127';
-        const GITHUB_REPO = 'xiaomi-bl-petition';
-        const GITHUB_API_BASE = 'https://api.github.com';
 
         // 初始化画布
         function initCanvas() {
@@ -1601,8 +1588,8 @@
             }
             
             return {
-                x: (clientX - rect.left) * (canvas.width / window.devicePixelRatio / rect.width),
-                y: (clientY - rect.top) * (150 / rect.height)
+                x: clientX - rect.left,
+                y: clientY - rect.top
             };
         }
 
@@ -1790,7 +1777,16 @@
         // 更新统计数字
         function updateStats() {
             document.getElementById('signatureCount').textContent = signatureCount;
-            document.getElementById('supportCount').textContent = Math.max(50, Math.floor(signatureCount * 1.5));
+            
+            // 计算支持设备总数（累加每个用户的设备）
+            supportDeviceCount = 0;
+            signatures.forEach(signature => {
+                if (signature.devices && Array.isArray(signature.devices)) {
+                    supportDeviceCount += signature.devices.length;
+                }
+            });
+            document.getElementById('supportCount').textContent = supportDeviceCount;
+            
             // 从2025年7月29日开始计算倡议天数
             const startDate = new Date('2025-07-29');
             const today = new Date();
@@ -1804,7 +1800,7 @@
             const email = document.getElementById('email').value.trim();
             const devices = [...supportDevices]; // 复制设备列表
 
-            // 检查冷却时间（只在提交时提示）
+            // 检查冷却时间
             const cooldownRemaining = checkCooldown();
             if (cooldownRemaining > 0) {
                 showSignatureMessage('请勿频繁提交', 'error');
@@ -1873,7 +1869,7 @@
                     timestamp: Date.now()
                 };
 
-                // 添加到数组
+                // 添加到数组开头
                 signatures.unshift(newSignature);
                 signatureCount = signatures.length;
                 
@@ -1887,7 +1883,6 @@
                 
                 // 清空设备列表
                 supportDevices = [];
-                updateDeviceList();
                 
                 // 更新UI
                 updateStats();
@@ -1917,6 +1912,17 @@
             hasDrawn = false; // 重置绘制状态
         }
 
+        // 分页功能
+        function getTotalPages() {
+            return Math.ceil(signatures.length / SIGNATURES_PER_PAGE);
+        }
+
+        function getCurrentPageSignatures() {
+            const startIndex = (currentPage - 1) * SIGNATURES_PER_PAGE;
+            const endIndex = startIndex + SIGNATURES_PER_PAGE;
+            return signatures.slice(startIndex, endIndex);
+        }
+
         // 加载签名列表到页面
         async function loadSignaturesToPage() {
             const container = document.getElementById('signaturesPageContainer');
@@ -1931,11 +1937,10 @@
                 return;
             }
 
+            const currentSignatures = getCurrentPageSignatures();
             let html = '';
-            // 只显示最近的64个签名
-            const recentSignatures = signatures.slice(0, 64);
             
-            recentSignatures.forEach(signature => {
+            currentSignatures.forEach(signature => {
                 // 生成设备标签
                 let devicesHtml = '';
                 if (signature.devices && signature.devices.length > 0) {
@@ -1970,7 +1975,7 @@
 
         // 更新分页控件
         function updatePagination() {
-            const totalPages = Math.ceil(signatures.length / SIGNATURES_PER_PAGE);
+            const totalPages = getTotalPages();
             const prevBtn = document.getElementById('prevPage');
             const nextBtn = document.getElementById('nextPage');
             const pageInfo = document.getElementById('pageInfo');
@@ -1985,7 +1990,7 @@
 
         // 页面导航
         async function goToPage(page) {
-            const totalPages = Math.ceil(signatures.length / SIGNATURES_PER_PAGE);
+            const totalPages = getTotalPages();
             if (page >= 1 && page <= totalPages) {
                 currentPage = page;
                 await loadSignaturesToPage();
@@ -1998,7 +2003,11 @@
             document.body.style.overflow = 'hidden';
             initCanvas();
             
-            // 不显示冷却时间提示，只在提交时提示
+            // 检查冷却时间
+            const cooldownRemaining = checkCooldown();
+            if (cooldownRemaining > 0) {
+                // 不显示冷却提示，只在提交时提示
+            }
         }
 
         function closeSignatureModal() {
@@ -2142,9 +2151,9 @@
             setupMobileMenu();
             setupPrivacyModal();
             
-            // 加载初始数据
-            await loadSignaturesToPage();
+            // 更新统计数据
             updateStats();
+            loadSignaturesToPage();
             
             // 添加滚动动画
             const observer = new IntersectionObserver((entries) => {
@@ -2167,9 +2176,9 @@
             window.addEventListener('scroll', function() {
                 const navbar = document.querySelector('.navbar');
                 if (window.scrollY > 30) {
-                    navbar.style.background = 'rgba(10, 10, 15, 0.95)';
+                    navbar.style.background = 'rgba(255, 255, 255, 0.3)';
                 } else {
-                    navbar.style.background = 'rgba(10, 10, 15, 0.8)';
+                    navbar.style.background = 'rgba(255, 255, 255, 0.3)';
                 }
             });
 
