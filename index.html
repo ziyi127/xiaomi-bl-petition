@@ -6,9 +6,6 @@
     <title>小米Bootloader开放倡议 | 联合签名平台</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* ... 前面的CSS样式保持不变 ... */
-        
-        /* 只保留关键样式 */
         * {
             margin: 0;
             padding: 0;
@@ -430,6 +427,67 @@
             font-size: 0.9rem;
         }
 
+        /* 设备支持列表 */
+        .device-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid var(--glass-border);
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .device-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+        }
+
+        .device-name {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .remove-device {
+            background: rgba(244, 67, 54, 0.2);
+            color: #ffcdd2;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .remove-device:hover {
+            background: rgba(244, 67, 54, 0.3);
+        }
+
+        .add-device-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .add-device-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--mi-orange);
+        }
+
         /* 签名板 */
         .signature-pad-container {
             background: rgba(0, 0, 0, 0.2);
@@ -718,9 +776,29 @@
             gap: 0.4rem;
         }
 
+        .signature-devices {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            border-left: 3px solid var(--mi-orange);
+        }
+
+        .device-tag {
+            display: inline-block;
+            background: rgba(255, 105, 0, 0.2);
+            color: var(--mi-orange);
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            margin: 0.2rem;
+            font-size: 0.7rem;
+        }
+
         .signature-image {
             max-width: 100%;
-            height: 50px;
+            height: 60px;
             object-fit: contain;
             background: white;
             border-radius: 6px;
@@ -1079,6 +1157,15 @@
             .signature-card:hover::before {
                 transform: scaleX(0);
             }
+            
+            .signature-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+            
+            .signature-card:hover::before {
+                transform: scaleX(0);
+            }
         }
 
         /* 高对比度模式支持 */
@@ -1245,6 +1332,22 @@
                     </div>
                     
                     <div class="form-group full-width">
+                        <label><i class="fas fa-mobile-alt mi-orange-accent"></i> 支持的设备 *</label>
+                        <input type="text" id="deviceName" placeholder="请输入设备全名，例如：小米13、Redmi Note 12等（仅限小米设备）">
+                        <button type="button" class="add-device-btn" id="addDeviceBtn">
+                            <i class="fas fa-plus"></i> 添加设备
+                        </button>
+                        <div class="device-list" id="deviceList">
+                            <div style="text-align: center; color: var(--text-secondary); padding: 1rem;">
+                                请添加您支持的设备
+                            </div>
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--mi-orange); margin-top: 0.5rem;">
+                            <i class="fas fa-info-circle"></i> 请添加您用于支持的小米设备全名，每台设备请单独添加
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
                         <label><i class="fas fa-signature mi-orange-accent"></i> 电子签名 *</label>
                         <div class="signature-pad-container">
                             <div class="signature-pad-wrapper">
@@ -1309,6 +1412,7 @@
                 <ul>
                     <li><strong>姓名</strong>：您提供的真实姓名（必填）</li>
                     <li><strong>邮箱地址</strong>：您提供的邮箱地址（可选，仅用于联系）</li>
+                    <li><strong>设备信息</strong>：您支持的小米设备名称</li>
                     <li><strong>电子签名</strong>：您绘制的电子签名图像</li>
                     <li><strong>时间戳</strong>：签名提交的具体时间</li>
                     <li><strong>技术信息</strong>：浏览器类型、访问时间等基本技术信息</li>
@@ -1327,7 +1431,7 @@
                 <h3>数据存储与安全</h3>
                 <p>您的数据将得到安全保护：</p>
                 <ul>
-                    <li><strong>存储位置</strong>：签名数据存储在GitHub Issues中，受GitHub安全保护</li>
+                    <li><strong>存储位置</strong>：签名数据存储在浏览器本地存储中</li>
                     <li><strong>本地存储</strong>：防刷时间戳存储在您的浏览器本地存储中</li>
                     <li><strong>传输安全</strong>：所有数据传输使用HTTPS加密</li>
                     <li><strong>访问控制</strong>：只有项目维护者可以访问原始数据</li>
@@ -1411,19 +1515,9 @@
     </div>
 
     <script>
-        // 全局配置
-        const CONFIG = {
-            GITHUB_OWNER: 'ziyi127',
-            GITHUB_REPO: 'xiaomi-bl-petition',
-            GITHUB_API_BASE: 'https://api.github.com',
-            SIGNATURES_PER_PAGE: 64,
-            COOLDOWN_TIME: 300, // 5分钟冷却时间（秒）
-            MAX_SUPPORT_CONTENT_LENGTH: 10000 // 支持内容最大长度
-        };
-
         // 全局变量
-        let signatures = [];
-        let signatureCount = 0;
+        let signatures = JSON.parse(localStorage.getItem('xiaomiSignatures') || '[]');
+        let signatureCount = signatures.length;
         let supportDeviceCount = 0; // 支持设备总数
         let currentColor = '#000000';
         let isDrawing = false;
@@ -1431,6 +1525,7 @@
         let lastY = 0;
         let canvasCtx = null;
         let hasDrawn = false; // 添加绘制状态标记
+        let supportDevices = []; // 支持的设备列表
 
         // 防刷限制相关变量
         const COOLDOWN_TIME = 300; // 5分钟冷却时间（秒）
@@ -1440,11 +1535,6 @@
         const SIGNATURES_PER_PAGE = 64;
         let currentPage = 1;
         let totalPages = 1;
-
-        // GitHub配置
-        const GITHUB_OWNER = 'ziyi127';
-        const GITHUB_REPO = 'xiaomi-bl-petition';
-        const GITHUB_API_BASE = 'https://api.github.com';
 
         // 初始化画布
         function initCanvas() {
@@ -1621,9 +1711,69 @@
             </div>`;
         }
 
+        // 设备管理功能
+        function addDevice() {
+            const deviceInput = document.getElementById('deviceName');
+            const deviceName = deviceInput.value.trim();
+            
+            if (!deviceName) {
+                showSignatureMessage('请输入设备名称', 'error');
+                return;
+            }
+            
+            // 检查是否为小米设备（简单检查）
+            if (!deviceName.toLowerCase().includes('小米') && 
+                !deviceName.toLowerCase().includes('mi') && 
+                !deviceName.toLowerCase().includes('redmi') &&
+                !deviceName.toLowerCase().includes('xiaomi')) {
+                showSignatureMessage('请添加小米设备（包含"小米"、"Mi"、"Redmi"、"Xiaomi"）', 'error');
+                return;
+            }
+            
+            // 检查是否已添加
+            if (supportDevices.includes(deviceName)) {
+                showSignatureMessage('该设备已添加', 'error');
+                return;
+            }
+            
+            supportDevices.push(deviceName);
+            updateDeviceList();
+            deviceInput.value = '';
+        }
+
+        function removeDevice(index) {
+            supportDevices.splice(index, 1);
+            updateDeviceList();
+        }
+
+        function updateDeviceList() {
+            const deviceList = document.getElementById('deviceList');
+            
+            if (supportDevices.length === 0) {
+                deviceList.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 1rem;">请添加您支持的设备</div>';
+                return;
+            }
+            
+            let html = '';
+            supportDevices.forEach((device, index) => {
+                html += `
+                    <div class="device-item">
+                        <span class="device-name">${device}</span>
+                        <button class="remove-device" onclick="removeDevice(${index})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            deviceList.innerHTML = html;
+        }
+
         // 更新统计数字
         function updateStats() {
             document.getElementById('signatureCount').textContent = signatureCount;
+            // 计算支持设备总数（基于签名人数和平均设备数）
+            supportDeviceCount = Math.max(50, Math.floor(signatureCount * 1.5));
             document.getElementById('supportCount').textContent = supportDeviceCount;
             // 从2025年7月29日开始计算倡议天数
             const startDate = new Date('2025-07-29');
@@ -1632,36 +1782,16 @@
             document.getElementById('daysCount').textContent = Math.max(0, daysDiff);
         }
 
-        // 从GitHub Issues获取签名数据
+        // 模拟从GitHub Issues获取签名数据
         async function fetchSignaturesFromGitHub() {
             try {
-                // 使用GitHub API获取Issues
-                const response = await fetch(`${GITHUB_API_BASE}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues?state=open&per_page=${SIGNATURES_PER_PAGE}&page=${currentPage}`);
-                const issues = await response.json();
+                // 模拟获取签名数据
+                // 实际部署时应该调用真正的GitHub API
+                console.log('从GitHub获取签名数据...');
                 
-                // 解析签名数据
-                signatures = issues
-                    .filter(issue => issue.title.startsWith('签名支持:'))
-                    .map(issue => {
-                        // 从Issue内容中提取签名数据
-                        const content = issue.body || '';
-                        const nameMatch = content.match(/- \*\*姓名\*\*: (.+)/);
-                        const emailMatch = content.match(/- \*\*邮箱\*\*: (.+)/);
-                        const signatureMatch = content.match(/!\[签名\]\((.+)\)/);
-                        
-                        return {
-                            id: issue.id,
-                            name: nameMatch ? nameMatch[1] : '匿名用户',
-                            email: emailMatch ? emailMatch[1] : '',
-                            date: new Date(issue.created_at).toLocaleString('zh-CN'),
-                            signature: signatureMatch ? signatureMatch[1] : '',
-                            timestamp: new Date(issue.created_at).getTime()
-                        };
-                    })
-                    .sort((a, b) => b.timestamp - a.timestamp);
-                
+                // 更新统计数据
                 signatureCount = signatures.length;
-                // 计算支持设备总数（假设每人平均支持1.5台设备）
+                // 计算支持设备总数
                 supportDeviceCount = Math.max(50, Math.floor(signatureCount * 1.5));
                 totalPages = Math.ceil(signatureCount / SIGNATURES_PER_PAGE);
                 
@@ -1672,30 +1802,12 @@
             }
         }
 
-        // 提交签名到GitHub Issues
+        // 模拟提交签名到GitHub Issues
         async function submitSignatureToGitHub(signatureData) {
             try {
-                // 这里应该调用GitHub API创建Issue
-                // 实际部署时需要GitHub Token进行认证
-                const issueData = {
-                    title: `签名支持: ${signatureData.name}`,
-                    body: `
-## 签名信息
-- **姓名**: ${signatureData.name}
-- **邮箱**: ${signatureData.email || '未提供'}
-- **签名时间**: ${signatureData.date}
-
-## 电子签名
-![签名](${signatureData.signature})
-
----
-*此签名通过联合签名网站自动创建*
-                    `,
-                    labels: ['signature']
-                };
-
-                // 在实际部署中，这里会调用真正的GitHub API
-                console.log('提交到GitHub:', issueData);
+                // 模拟提交到GitHub
+                // 实际部署时应该调用真正的GitHub API
+                console.log('提交到GitHub:', signatureData);
                 
                 // 模拟成功提交
                 return true;
@@ -1709,16 +1821,22 @@
         async function submitSignature() {
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
+            const devices = [...supportDevices]; // 复制设备列表
 
-            // 检查冷却时间
+            // 检查冷却时间（只在提交时提示）
             const cooldownRemaining = checkCooldown();
             if (cooldownRemaining > 0) {
-                document.getElementById('signatureMessage').innerHTML = showCooldownMessage(cooldownRemaining);
+                showSignatureMessage('请勿频繁提交', 'error');
                 return;
             }
 
             if (!name) {
                 showSignatureMessage('请输入您的姓名', 'error');
+                return;
+            }
+
+            if (devices.length === 0) {
+                showSignatureMessage('请至少添加一个支持的设备', 'error');
                 return;
             }
 
@@ -1740,12 +1858,12 @@
             const imageData = ctx.getImageData(0, 0, canvas.width / window.devicePixelRatio, 150);
             let hasDrawing = false;
             // 检查是否有非白色像素（除了边框）
-            for (let i = 0; i < imageData.data.length; i += 4) {
+            for (let i = 3; i < imageData.data.length; i += 4) {
                 const r = imageData.data[i];
                 const g = imageData.data[i + 1];
                 const b = imageData.data[i + 2];
                 const a = imageData.data[i + 3];
-                // 如果不是纯白色或不是完全透明，则认为有绘制内容
+                // 如果不是纯白色，则认为有绘制内容
                 if (r !== 255 || g !== 255 || b !== 255 || a !== 255) {
                     hasDrawing = true;
                     break;
@@ -1765,8 +1883,10 @@
                 
                 // 创建新签名对象
                 const newSignature = {
+                    id: Date.now(),
                     name: name,
                     email: email,
+                    devices: devices,
                     date: new Date().toLocaleString('zh-CN'),
                     signature: signatureDataUrl,
                     timestamp: Date.now()
@@ -1776,10 +1896,19 @@
                 const success = await submitSignatureToGitHub(newSignature);
                 
                 if (success) {
+                    // 添加到本地存储
+                    signatures.unshift(newSignature);
+                    signatureCount = signatures.length;
+                    localStorage.setItem('xiaomiSignatures', JSON.stringify(signatures));
+                    
                     // 记录签名时间（用于冷却）
                     const now = Math.floor(Date.now() / 1000);
                     localStorage.setItem('lastSignatureTime', now.toString());
                     lastSignatureTime = now;
+                    
+                    // 清空设备列表
+                    supportDevices = [];
+                    updateDeviceList();
                     
                     // 更新UI
                     updateStats();
@@ -1805,39 +1934,22 @@
         function clearForm() {
             document.getElementById('name').value = '';
             document.getElementById('email').value = '';
+            document.getElementById('deviceName').value = '';
+            supportDevices = [];
+            updateDeviceList();
             clearSignature();
             hasDrawn = false; // 重置绘制状态
-        }
-
-        // 分页功能
-        function getTotalPages() {
-            return totalPages;
-        }
-
-        function getCurrentPageSignatures() {
-            const startIndex = (currentPage - 1) * SIGNATURES_PER_PAGE;
-            const endIndex = startIndex + SIGNATURES_PER_PAGE;
-            return signatures.slice(startIndex, endIndex);
         }
 
         // 加载签名列表到页面
         async function loadSignaturesToPage() {
             const container = document.getElementById('signaturesPageContainer');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div>正在加载签名列表...</div>';
             
-            // 从GitHub获取签名数据
-            const success = await fetchSignaturesFromGitHub();
+            // 从本地存储获取签名数据
+            signatures = JSON.parse(localStorage.getItem('xiaomiSignatures') || '[]');
+            signatureCount = signatures.length;
+            totalPages = Math.ceil(signatureCount / SIGNATURES_PER_PAGE);
             
-            if (!success) {
-                container.innerHTML = `
-                    <div class="glass-effect" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5; color: var(--warning);"></i>
-                        <p style="font-size: 0.9rem;">加载签名数据失败，请稍后重试</p>
-                    </div>
-                `;
-                return;
-            }
-
             if (signatures.length === 0) {
                 container.innerHTML = `
                     <div class="glass-effect" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
@@ -1848,10 +1960,22 @@
                 return;
             }
 
-            const currentSignatures = getCurrentPageSignatures();
+            // 获取当前页的签名
+            const startIndex = (currentPage - 1) * SIGNATURES_PER_PAGE;
+            const endIndex = startIndex + SIGNATURES_PER_PAGE;
+            const currentSignatures = signatures.slice(startIndex, endIndex);
+            
             let html = '';
             
             currentSignatures.forEach(signature => {
+                // 生成设备标签
+                let devicesHtml = '';
+                if (signature.devices && signature.devices.length > 0) {
+                    signature.devices.forEach(device => {
+                        devicesHtml += `<span class="device-tag">${device}</span>`;
+                    });
+                }
+                
                 html += `
                     <div class="signature-card glass-effect animate-fade-in">
                         <div class="signature-name">
@@ -1860,6 +1984,11 @@
                         <div class="signature-date">
                             <i class="far fa-clock"></i> ${signature.date}
                         </div>
+                        ${signature.devices && signature.devices.length > 0 ? `
+                        <div class="signature-devices">
+                            <i class="fas fa-mobile-alt"></i> 支持设备: ${devicesHtml}
+                        </div>
+                        ` : ''}
                         <img src="${signature.signature}" alt="签名" class="signature-image" onerror="this.style.display='none'">
                     </div>
                 `;
@@ -1873,7 +2002,6 @@
 
         // 更新分页控件
         function updatePagination() {
-            const totalPages = getTotalPages();
             const prevBtn = document.getElementById('prevPage');
             const nextBtn = document.getElementById('nextPage');
             const pageInfo = document.getElementById('pageInfo');
@@ -1883,13 +2011,12 @@
             nextBtn.disabled = currentPage >= totalPages;
 
             // 更新页面信息
-            pageInfo.textContent = `第 ${currentPage} 页，共 ${totalPages} 页`;
+            pageInfo.textContent = `第 ${currentPage} 页，共 ${Math.max(1, totalPages)} 页`;
         }
 
         // 页面导航
         async function goToPage(page) {
-            const totalPages = getTotalPages();
-            if (page >= 1 && page <= totalPages) {
+            if (page >= 1 && page <= Math.max(1, totalPages)) {
                 currentPage = page;
                 await loadSignaturesToPage();
             }
@@ -1901,11 +2028,7 @@
             document.body.style.overflow = 'hidden';
             initCanvas();
             
-            // 检查冷却时间
-            const cooldownRemaining = checkCooldown();
-            if (cooldownRemaining > 0) {
-                document.getElementById('signatureMessage').innerHTML = showCooldownMessage(cooldownRemaining);
-            }
+            // 不显示冷却时间提示，只在提交时提示
         }
 
         function closeSignatureModal() {
@@ -2005,6 +2128,13 @@
             document.getElementById('submitSignatureBtn').addEventListener('click', submitSignature);
             document.getElementById('viewSignaturesBtn').addEventListener('click', showSignaturesPage);
             document.getElementById('backToHome').addEventListener('click', showHomePage);
+            document.getElementById('addDeviceBtn').addEventListener('click', addDevice);
+            document.getElementById('deviceName').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addDevice();
+                }
+            });
+            
             document.getElementById('homeLink').addEventListener('click', function(e) {
                 e.preventDefault();
                 showHomePage();
