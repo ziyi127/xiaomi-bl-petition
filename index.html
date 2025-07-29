@@ -14,25 +14,26 @@
         }
 
         :root {
-            --primary: #667eea;
-            --primary-dark: #764ba2;
-            --secondary: #00c3ff;
-            --accent: #ff6b6b;
-            --light: #f8f9fa;
-            --dark: #2c3e50;
+            --mi-orange: #ff6900;
+            --mi-orange-dark: #e55e00;
+            --mi-orange-light: #ff8c42;
+            --mi-blue: #00c3ff;
+            --mi-gray: #f5f5f5;
+            --dark-bg: #0a0a0f;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
             --success: #4caf50;
             --warning: #ff9800;
             --error: #f44336;
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
-            color: var(--light);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.6;
             overflow-x: hidden;
@@ -40,41 +41,36 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* 高级感简约设计 */
-        .premium-glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        /* 小米橙色主题元素 */
+        .mi-orange-accent {
+            color: var(--mi-orange);
+        }
+
+        .mi-orange-bg {
+            background: var(--mi-orange);
+        }
+
+        .mi-orange-gradient {
+            background: linear-gradient(45deg, var(--mi-orange), var(--mi-orange-light));
+        }
+
+        .mi-orange-border {
+            border-color: var(--mi-orange) !important;
+        }
+
+        /* 毛玻璃效果 */
+        .glass-effect {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            border-radius: 20px;
             box-shadow: var(--glass-shadow);
-            transition: var(--transition);
-        }
-
-        .premium-glass:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        /* 清新配色 */
-        .fresh-accent {
-            color: var(--accent);
-        }
-
-        .fresh-gradient {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .fresh-bg {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
         }
 
         /* 导航栏 */
         .navbar {
-            padding: 1.5rem 5%;
+            padding: 1rem 3%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -83,17 +79,17 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(10, 10, 15, 0.8);
             border-bottom: 1px solid var(--glass-border);
-            height: 70px;
+            height: 60px;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background: linear-gradient(45deg, var(--mi-orange), var(--mi-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -101,80 +97,131 @@
         }
 
         .logo i {
-            color: var(--accent);
-            margin-right: 0.8rem;
+            color: var(--mi-orange);
+            margin-right: 0.5rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .nav-links a {
-            color: var(--light);
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: var(--transition);
-            padding: 0.8rem 1.2rem;
-            border-radius: 16px;
-            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.5rem;
         }
 
         .nav-links a:hover {
-            color: var(--accent);
-            background: rgba(255, 255, 255, 0.15);
+            color: var(--mi-orange);
+            background: rgba(255, 105, 0, 0.1);
+        }
+
+        .nav-links a.active {
+            color: var(--mi-orange);
+            background: rgba(255, 105, 0, 0.15);
+        }
+
+        /* 移动端导航菜单 */
+        .mobile-menu {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 3%;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+
+        .mobile-menu .nav-links {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mobile-menu .nav-links a {
+            padding: 1rem;
+            border-radius: 12px;
+            justify-content: center;
+        }
+
+        .mobile-menu .nav-links a:hover {
+            color: var(--mi-orange);
+            background: rgba(255, 105, 0, 0.1);
+        }
+
+        .mobile-menu .nav-links a.active {
+            color: var(--mi-orange);
+            background: rgba(255, 105, 0, 0.15);
         }
 
         /* 主要内容区域 */
         .main-content {
-            padding: 90px 5% 50px;
-            max-width: 1400px;
+            padding: 80px 3% 30px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .hero-section {
             text-align: center;
-            margin-bottom: 3rem;
-            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            padding: 2rem 1rem;
         }
 
         .hero-title {
-            font-size: 3rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--mi-orange), var(--mi-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
+            line-height: 1.3;
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
         /* 统计卡片 */
         .stats-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
         .stat-card {
-            padding: 2.5rem 2rem;
+            padding: 1.5rem 1rem;
             text-align: center;
-            transition: var(--transition);
+            transition: transform 0.3s ease;
             position: relative;
             overflow: hidden;
         }
@@ -186,68 +233,70 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.8s;
+            background: linear-gradient(90deg, transparent, rgba(255, 105, 0, 0.1), transparent);
+            transition: left 0.5s;
         }
 
         .stat-card:hover::before {
             left: 100%;
         }
 
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
         .stat-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent);
-            transition: var(--transition);
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            color: var(--mi-orange);
         }
 
         .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(45deg, var(--mi-orange), var(--mi-orange-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .stat-label {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         /* 签名按钮 */
         .signature-button-container {
             text-align: center;
-            margin: 3rem 0;
+            margin: 2rem 0;
         }
 
         .signature-btn {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background: linear-gradient(45deg, var(--mi-orange), var(--mi-orange-dark));
             color: white;
             border: none;
-            padding: 1.5rem 3rem;
-            font-size: 1.3rem;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            border-radius: 20px;
+            border-radius: 15px;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 105, 0, 0.3);
             display: inline-flex;
             align-items: center;
-            gap: 1rem;
-            min-height: 65px;
-            margin: 1rem;
+            gap: 0.8rem;
+            min-height: 56px;
+            margin: 0.5rem;
         }
 
         .signature-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 105, 0, 0.4);
         }
 
         .signature-btn:active {
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         /* 签名模态框 */
@@ -259,22 +308,21 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
         }
 
         .signature-modal-content {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
             margin: 5% auto;
-            padding: 2.5rem;
-            border-radius: 25px;
+            padding: 2rem;
+            border-radius: 20px;
             width: 95%;
-            max-width: 800px;
+            max-width: 700px;
             max-height: 90vh;
             overflow-y: auto;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
             position: relative;
         }
 
@@ -282,83 +330,76 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--glass-border);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .modal-title {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--accent);
+            color: var(--mi-orange);
             margin: 0;
         }
 
         .close-modal {
-            color: var(--light);
-            font-size: 2.5rem;
+            color: var(--text-secondary);
+            font-size: 2rem;
             font-weight: bold;
             cursor: pointer;
             background: none;
             border: none;
             padding: 0;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .close-modal:hover {
-            color: var(--accent);
-            background: rgba(255, 255, 255, 0.1);
+            color: var(--mi-orange);
+            background: rgba(255, 105, 0, 0.1);
         }
 
         /* 签名表单 */
         .signature-section {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .section-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             text-align: center;
             position: relative;
-            color: var(--accent);
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 50px;
-            height: 4px;
-            background: var(--accent);
-            margin: 1rem auto;
+            width: 40px;
+            height: 3px;
+            background: var(--mi-orange);
+            margin: 0.5rem auto;
             border-radius: 2px;
         }
 
         .form-container {
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .form-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .form-group.full-width {
@@ -367,42 +408,43 @@
 
         label {
             display: block;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
             font-weight: 500;
-            color: var(--light);
-            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
         }
 
         input, textarea {
             width: 100%;
-            padding: 1.2rem;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.08);
             border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            color: var(--light);
-            font-size: 1.1rem;
-            transition: var(--transition);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
         input:focus, textarea:focus {
             outline: none;
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+            border-color: var(--mi-orange);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 2px rgba(255, 105, 0, 0.2);
         }
 
         input::placeholder, textarea::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
         /* 设备支持列表 */
         .device-list {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
             border: 1px solid var(--glass-border);
-            max-height: 250px;
+            max-height: 200px;
             overflow-y: auto;
         }
 
@@ -410,33 +452,26 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.8rem;
+            padding: 0.5rem;
             margin: 0.5rem 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            transition: var(--transition);
-        }
-
-        .device-item:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
         }
 
         .device-name {
-            font-size: 1.1rem;
-            color: var(--light);
-            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-primary);
         }
 
         .remove-device {
             background: rgba(244, 67, 54, 0.2);
             color: #ffcdd2;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.9rem;
-            transition: var(--transition);
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
         }
 
         .remove-device:hover {
@@ -445,37 +480,37 @@
 
         .add-device-btn {
             background: rgba(255, 255, 255, 0.1);
-            color: var(--light);
+            color: var(--text-primary);
             border: 1px solid var(--glass-border);
-            padding: 0.8rem 1.5rem;
-            border-radius: 16px;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1.1rem;
-            transition: var(--transition);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 0.8rem;
-            margin-top: 1rem;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
         }
 
         .add-device-btn:hover {
             background: rgba(255, 255, 255, 0.15);
-            border-color: var(--accent);
+            border-color: var(--mi-orange);
         }
 
         /* 签名板 */
         .signature-pad-container {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 1.2rem;
-            margin: 1.2rem 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
             border: 1px solid var(--glass-border);
         }
 
         .signature-pad-wrapper {
             position: relative;
             background: white;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
         }
 
@@ -483,99 +518,98 @@
             cursor: crosshair;
             display: block;
             width: 100%;
-            height: 200px;
+            height: 150px;
             touch-action: none;
         }
 
         .signature-controls {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            gap: 0.8rem;
+            margin-top: 1rem;
             align-items: center;
         }
 
         .color-palette {
             display: flex;
-            gap: 0.6rem;
+            gap: 0.4rem;
             align-items: center;
-            margin-right: 1rem;
-        }
-
-        .color-palette span {
-            font-size: 1.1rem;
-            color: var(--light);
             margin-right: 0.5rem;
         }
 
+        .color-palette span {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-right: 0.3rem;
+        }
+
         .color-option {
-            width: 28px;
-            height: 28px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid transparent;
-            transition: var(--transition);
+            transition: all 0.2s ease;
         }
 
         .color-option.active {
             border-color: white;
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
 
         .btn {
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.5rem;
             border: none;
-            border-radius: 16px;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
             text-align: center;
-            min-height: 50px;
-            min-width: 50px;
+            min-height: 44px;
+            min-width: 44px;
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background: linear-gradient(45deg, var(--mi-orange), var(--mi-orange-dark));
             color: white;
             flex: 1;
-            min-width: 150px;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            min-width: 120px;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 105, 0, 0.3);
         }
 
         .btn-secondary {
             background: rgba(255, 255, 255, 0.1);
-            color: var(--light);
+            color: var(--text-primary);
             border: 1px solid var(--glass-border);
-            min-width: 120px;
+            min-width: 100px;
         }
 
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.15);
-            border-color: var(--accent);
+            border-color: var(--mi-orange);
         }
 
         /* 消息提示 */
         .message {
-            padding: 1.2rem 1.5rem;
-            border-radius: 16px;
-            margin: 1.2rem 0;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            margin: 0.8rem 0;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            font-size: 1.1rem;
+            gap: 0.5rem;
+            font-size: 0.9rem;
         }
 
         .message i {
-            font-size: 1.3rem;
+            font-size: 1rem;
             flex-shrink: 0;
         }
 
@@ -602,66 +636,64 @@
             background: rgba(255, 152, 0, 0.2);
             border: 1px solid rgba(255, 152, 0, 0.3);
             color: #ffe082;
-            padding: 1.5rem;
-            border-radius: 16px;
-            margin: 1.5rem 0;
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
             text-align: center;
-            font-size: 1.1rem;
         }
         
         .cooldown-timer {
             font-weight: bold;
-            color: var(--accent);
+            color: var(--mi-orange);
         }
 
         /* 签名列表页面 */
         .signatures-page {
-            padding: 90px 5% 50px;
-            max-width: 1400px;
+            padding: 80px 3% 30px;
+            max-width: 1200px;
             margin: 0 auto;
             display: none;
         }
 
         .page-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .page-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            color: var(--accent);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--mi-orange);
         }
 
         .pagination {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 1.5rem;
-            margin: 3rem 0;
+            gap: 1rem;
+            margin: 2rem 0;
             flex-wrap: wrap;
         }
 
         .pagination-btn {
             background: rgba(255, 255, 255, 0.1);
-            color: var(--light);
+            color: var(--text-primary);
             border: 1px solid var(--glass-border);
-            padding: 0.8rem 1.5rem;
-            border-radius: 12px;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             cursor: pointer;
-            transition: var(--transition);
-            font-size: 1.1rem;
+            transition: all 0.3s ease;
         }
 
         .pagination-btn:hover {
             background: rgba(255, 255, 255, 0.15);
-            border-color: var(--accent);
+            border-color: var(--mi-orange);
         }
 
         .pagination-btn.active {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            border-color: var(--accent);
+            background: linear-gradient(45deg, var(--mi-orange), var(--mi-orange-dark));
+            border-color: var(--mi-orange);
         }
 
         .pagination-btn:disabled {
@@ -670,47 +702,46 @@
         }
 
         .page-info {
-            color: var(--light);
-            font-size: 1.1rem;
-            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
         .back-to-home {
             text-align: center;
-            margin: 3rem 0;
+            margin: 2rem 0;
         }
 
         .back-btn {
             background: rgba(255, 255, 255, 0.1);
-            color: var(--light);
+            color: var(--text-primary);
             border: 1px solid var(--glass-border);
-            padding: 1.2rem 2.5rem;
-            border-radius: 16px;
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
             cursor: pointer;
-            transition: var(--transition);
-            font-size: 1.2rem;
-            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
         }
 
         .back-btn:hover {
             background: rgba(255, 255, 255, 0.15);
-            border-color: var(--accent);
+            border-color: var(--mi-orange);
         }
 
         /* 签名列表 */
         .signatures-section {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .signatures-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
         }
 
         .signature-card {
-            padding: 2rem;
-            transition: var(--transition);
+            padding: 1.2rem;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
@@ -721,8 +752,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: var(--accent);
+            height: 3px;
+            background: var(--mi-orange);
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
@@ -732,56 +763,55 @@
         }
 
         .signature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
 
         .signature-name {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: var(--light);
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.4rem;
         }
 
         .signature-date {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 1.2rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.4rem;
         }
 
         .signature-devices {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 1.2rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            border-left: 4px solid var(--accent);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            border-left: 3px solid var(--mi-orange);
         }
 
         .device-tag {
             display: inline-block;
-            background: rgba(255, 107, 107, 0.2);
-            color: var(--accent);
-            padding: 0.3rem 0.8rem;
-            border-radius: 16px;
-            margin: 0.3rem;
-            font-size: 0.8rem;
-            font-weight: 500;
+            background: rgba(255, 105, 0, 0.2);
+            color: var(--mi-orange);
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            margin: 0.2rem;
+            font-size: 0.7rem;
         }
 
         .signature-image {
             max-width: 100%;
-            height: 70px;
+            height: 60px;
             object-fit: contain;
             background: white;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 5px;
             border: 1px solid var(--glass-border);
         }
@@ -789,19 +819,18 @@
         /* 加载状态 */
         .loading {
             text-align: center;
-            padding: 3rem;
-            color: var(--light);
-            font-size: 1.1rem;
+            padding: 2rem;
+            color: var(--text-secondary);
         }
 
         .spinner {
             border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid var(--accent);
+            border-top: 3px solid var(--mi-orange);
             border-radius: 50%;
             width: 40px;
             height: 40px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 1.2rem;
+            margin: 0 auto 1rem;
         }
 
         @keyframes spin {
@@ -812,118 +841,215 @@
         /* 页脚 */
         .footer {
             text-align: center;
-            padding: 3rem 5%;
-            color: var(--light);
+            padding: 2rem 3%;
+            color: var(--text-secondary);
             border-top: 1px solid var(--glass-border);
-            margin-top: 3rem;
-            font-size: 1.1rem;
+            margin-top: 2rem;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
             flex-wrap: wrap;
         }
 
         .footer-links a {
-            color: var(--light);
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: var(--transition);
+            transition: color 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            font-size: 1rem;
+            gap: 0.5rem;
         }
 
         .footer-links a:hover {
-            color: var(--accent);
+            color: var(--mi-orange);
         }
 
         /* GitHub项目信息 */
         .github-info {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
             border: 1px solid var(--glass-border);
         }
 
         .github-info a {
-            color: var(--secondary);
+            color: var(--mi-blue);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            transition: var(--transition);
+            gap: 0.5rem;
+            transition: color 0.3s ease;
         }
 
         .github-info a:hover {
-            color: var(--accent);
+            color: var(--mi-orange);
+        }
+
+        /* 小米品牌元素 */
+        .mi-branding {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .mi-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--mi-orange);
+        }
+
+        .mi-tagline {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* 背景装饰 */
+        .mi-decoration {
+            position: fixed;
+            opacity: 0.1;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .mi-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--mi-orange);
+            filter: blur(60px);
+        }
+
+        .mi-circle-1 {
+            top: 10%;
+            left: 10%;
+        }
+
+        .mi-circle-2 {
+            bottom: 20%;
+            right: 10%;
+            background: var(--mi-blue);
+        }
+
+        /* 隐私政策模态框 */
+        .privacy-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .privacy-modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .privacy-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .privacy-modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--mi-orange);
+            margin: 0;
+        }
+
+        .privacy-close {
+            color: var(--text-secondary);
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .privacy-close:hover {
+            color: var(--mi-orange);
+            background: rgba(255, 105, 0, 0.1);
+        }
+
+        .privacy-modal-body {
+            line-height: 1.8;
+        }
+
+        .privacy-modal-body h3 {
+            color: var(--mi-orange);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+        }
+
+        .privacy-modal-body p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .privacy-modal-body ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .privacy-modal-body li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
         }
 
         /* 响应式设计 */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem 3%;
-                height: 60px;
-            }
-            
-            .logo {
-                font-size: 1.5rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-            }
-            
-            .nav-links a {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-                gap: 0.5rem;
-            }
-            
-            .main-content {
-                padding: 80px 3% 30px;
-            }
-            
             .hero-title {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             
             .hero-subtitle {
                 font-size: 1rem;
             }
             
-            .stats-container {
+            .form-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
             }
             
-            .stat-card {
-                padding: 2rem 1.5rem;
+            .nav-toggle {
+                display: block;
             }
             
-            .stat-icon {
-                font-size: 2.5rem;
-                margin-bottom: 1rem;
+            .nav-links {
+                display: none;
             }
             
-            .stat-number {
-                font-size: 2.5rem;
-            }
-            
-            .stat-label {
-                font-size: 1rem;
-            }
-            
-            .signature-btn {
-                padding: 1.2rem 2rem;
-                font-size: 1.1rem;
-                gap: 0.8rem;
-                min-height: 55px;
-                margin: 0.5rem;
+            .main-content {
+                padding: 100px 3% 30px;
             }
             
             .form-container {
@@ -931,7 +1057,7 @@
             }
             
             .signature-pad {
-                height: 150px;
+                height: 120px;
             }
             
             .signature-controls {
@@ -945,93 +1071,17 @@
             }
             
             .btn {
-                padding: 0.8rem 1.5rem;
-                font-size: 1rem;
-                min-height: 45px;
+                width: 100%;
+                margin: 0.5rem 0;
             }
             
-            .message {
-                padding: 1rem 1.2rem;
-                font-size: 1rem;
-                gap: 0.8rem;
-            }
-            
-            .message i {
-                font-size: 1.1rem;
-            }
-            
-            .signatures-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .signature-card {
-                padding: 1.5rem;
-            }
-            
-            .signature-name {
-                font-size: 1.1rem;
-                margin-bottom: 0.6rem;
-                gap: 0.6rem;
-            }
-            
-            .signature-date {
-                font-size: 0.8rem;
-                margin-bottom: 1rem;
-                gap: 0.6rem;
-            }
-            
-            .signature-devices {
-                font-size: 0.8rem;
-                padding: 0.8rem;
-                margin-bottom: 1rem;
-            }
-            
-            .device-tag {
-                padding: 0.2rem 0.6rem;
-                font-size: 0.7rem;
-                margin: 0.2rem;
-            }
-            
-            .signature-image {
-                height: 50px;
-                padding: 3px;
-            }
-            
-            .loading {
-                padding: 2rem;
-                font-size: 1rem;
-            }
-            
-            .spinner {
-                width: 30px;
-                height: 30px;
-                border-width: 2px;
-            }
-            
-            .footer {
-                padding: 2rem 3%;
-                font-size: 0.9rem;
+            .stat-number {
+                font-size: 1.8rem;
             }
             
             .footer-links {
+                flex-direction: column;
                 gap: 1rem;
-                margin: 1rem 0;
-            }
-            
-            .footer-links a {
-                font-size: 0.8rem;
-                gap: 0.5rem;
-            }
-            
-            .github-info {
-                padding: 1rem;
-                margin: 1rem 0;
-            }
-            
-            .github-info a {
-                gap: 0.8rem;
-                font-size: 0.9rem;
             }
         }
 
@@ -1040,37 +1090,41 @@
                 font-size: 1.8rem;
             }
             
-            .hero-subtitle {
-                font-size: 0.9rem;
+            .stat-card {
+                padding: 1rem;
             }
             
-            .nav-links {
-                display: none;
-            }
-            
-            .form-grid {
-                grid-template-columns: 1fr;
+            .stat-number {
+                font-size: 1.5rem;
             }
             
             .signature-btn {
                 padding: 1rem 1.5rem;
                 font-size: 1rem;
-                gap: 0.6rem;
-                min-height: 50px;
-                margin: 0.3rem;
-                width: calc(100% - 0.6rem);
             }
             
-            .stat-number {
-                font-size: 2rem;
+            .modal-title {
+                font-size: 1.3rem;
             }
             
-            .stat-label {
-                font-size: 0.9rem;
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .page-title {
+                font-size: 1.5rem;
             }
             
             .signature-pad {
-                height: 120px;
+                height: 100px;
+            }
+            
+            .privacy-modal-title {
+                font-size: 1.5rem;
+            }
+            
+            .privacy-modal-body h3 {
+                font-size: 1.1rem;
             }
         }
 
@@ -1087,7 +1141,7 @@
         }
 
         .animate-fade-in {
-            animation: fadeInUp 0.8s ease forwards;
+            animation: fadeInUp 0.6s ease forwards;
         }
 
         .delay-1 {
@@ -1105,7 +1159,7 @@
         /* 触摸设备优化 */
         @media (hover: none) and (pointer: coarse) {
             .nav-links a:hover {
-                color: var(--light);
+                color: var(--text-secondary);
                 background: transparent;
             }
             
@@ -1122,26 +1176,20 @@
                 transform: scaleX(0);
             }
             
-            .btn-primary:hover {
-                transform: none;
-                box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-            }
-            
-            .btn-secondary:hover {
-                background: rgba(255, 255, 255, 0.1);
-                border-color: var(--glass-border);
+            .signature-card:hover::before {
+                transform: scaleX(0);
             }
         }
 
         /* 高对比度模式支持 */
         @media (prefers-contrast: high) {
-            .premium-glass {
-                border: 3px solid white;
-                background: rgba(0, 0, 0, 0.9);
+            .glass-effect {
+                border: 2px solid white;
+                background: rgba(0, 0, 0, 0.8);
             }
             
-            .btn-primary, .signature-btn {
-                border: 3px solid var(--accent);
+            .signature-btn, .btn-primary {
+                border: 2px solid var(--mi-orange);
             }
         }
 
@@ -1160,28 +1208,43 @@
     </style>
 </head>
 <body>
+    <!-- 背景装饰元素 -->
+    <div class="mi-decoration mi-circle mi-circle-1"></div>
+    <div class="mi-decoration mi-circle mi-circle-2"></div>
+
     <!-- 导航栏 -->
-    <nav class="navbar premium-glass">
+    <nav class="navbar glass-effect">
         <div class="logo">
             <i class="fas fa-mobile-alt"></i> MI Bootloader
         </div>
+        <button class="nav-toggle" id="navToggle">
+            <i class="fas fa-bars"></i>
+        </button>
         <div class="nav-links">
             <a href="#" id="homeLink"><i class="fas fa-home"></i> 首页</a>
             <a href="#" id="signaturesLink"><i class="fas fa-users"></i> 签名列表</a>
         </div>
     </nav>
 
+    <!-- 移动端菜单 -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="nav-links">
+            <a href="#" id="mobileHomeLink"><i class="fas fa-home"></i> 首页</a>
+            <a href="#" id="mobileSignaturesLink"><i class="fas fa-users"></i> 签名列表</a>
+        </div>
+    </div>
+
     <!-- 主要内容 -->
     <main class="main-content" id="homePage">
         <!-- 英雄区域 -->
         <section id="home" class="hero-section animate-fade-in">
-            <h1 class="hero-title fresh-gradient">呼吁小米全面开放Bootloader解锁</h1>
+            <h1 class="hero-title">呼吁小米全面开放Bootloader解锁</h1>
             <p class="hero-subtitle">
                 我们相信开源精神和用户自由是科技发展的基石。让我们一起为小米设备的完全控制权发声，
                 要求小米官方全面开放Bootloader解锁权限，保障用户的合法权益。
             </p>
-            <div class="premium-glass" style="display: inline-block; padding: 1rem 2rem; margin-top: 1.5rem;">
-                <i class="fas fa-bullhorn fresh-accent"></i> 加入我们，为开源发声！
+            <div class="glass-effect" style="display: inline-block; padding: 0.8rem 1.5rem; margin-top: 1rem;">
+                <i class="fas fa-bullhorn mi-orange-accent"></i> 加入我们，为开源发声！
             </div>
             
             <!-- 签名按钮 -->
@@ -1193,25 +1256,31 @@
                     <i class="fas fa-users"></i> 查看所有签名
                 </button>
             </div>
+            
+            <!-- 小米品牌元素 -->
+            <div class="mi-branding">
+                <div class="mi-logo">MI</div>
+                <div class="mi-tagline">"让每个人都能享受科技的乐趣"</div>
+            </div>
         </section>
 
         <!-- 统计卡片 -->
         <section class="stats-container">
-            <div class="stat-card premium-glass animate-fade-in delay-1">
+            <div class="stat-card glass-effect animate-fade-in delay-1">
                 <div class="stat-icon">
                     <i class="fas fa-users"></i>
                 </div>
                 <div class="stat-number" id="signatureCount">0</div>
                 <div class="stat-label">已签名人数</div>
             </div>
-            <div class="stat-card premium-glass animate-fade-in delay-2">
+            <div class="stat-card glass-effect animate-fade-in delay-2">
                 <div class="stat-icon">
                     <i class="fas fa-mobile-alt"></i>
                 </div>
                 <div class="stat-number" id="supportCount">0</div>
                 <div class="stat-label">支持设备</div>
             </div>
-            <div class="stat-card premium-glass animate-fade-in delay-3">
+            <div class="stat-card glass-effect animate-fade-in delay-3">
                 <div class="stat-icon">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
@@ -1224,7 +1293,7 @@
     <!-- 签名列表页面 -->
     <div class="signatures-page" id="signaturesPage">
         <div class="page-header">
-            <h1 class="page-title fresh-accent">签名支持者列表</h1>
+            <h1 class="page-title animate-fade-in">签名支持者列表</h1>
             <p class="hero-subtitle">以下是支持小米Bootloader开放倡议的签名者</p>
         </div>
 
@@ -1259,40 +1328,40 @@
     <div id="signatureModal" class="signature-modal">
         <div class="signature-modal-content">
             <div class="modal-header">
-                <h2 class="modal-title fresh-accent">添加签名支持</h2>
+                <h2 class="modal-title">添加签名支持</h2>
                 <button class="close-modal" id="closeSignatureModal">&times;</button>
             </div>
             <div class="signature-section">
-                <div class="form-container premium-glass">
+                <div class="form-container glass-effect">
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="name"><i class="fas fa-user fresh-accent"></i> 姓名 *</label>
+                            <label for="name"><i class="fas fa-user mi-orange-accent"></i> 姓名 *</label>
                             <input type="text" id="name" placeholder="请输入您的真实姓名" required>
                         </div>
                         <div class="form-group">
-                            <label for="email"><i class="fas fa-envelope fresh-accent"></i> 邮箱 (可选)</label>
+                            <label for="email"><i class="fas fa-envelope mi-orange-accent"></i> 邮箱 (可选)</label>
                             <input type="email" id="email" placeholder="请输入您的邮箱地址">
                         </div>
                     </div>
                     
                     <div class="form-group full-width">
-                        <label for="deviceName"><i class="fas fa-mobile-alt fresh-accent"></i> 支持的设备 *</label>
+                        <label for="deviceName"><i class="fas fa-mobile-alt mi-orange-accent"></i> 支持的设备 *</label>
                         <input type="text" id="deviceName" placeholder="请输入设备全名，例如：小米13、Redmi Note 12等（仅限小米设备）">
                         <button type="button" class="add-device-btn" id="addDeviceBtn">
                             <i class="fas fa-plus"></i> 添加设备
                         </button>
                         <div class="device-list" id="deviceList">
-                            <div style="text-align: center; color: var(--light); padding: 1.5rem;">
+                            <div style="text-align: center; color: var(--text-secondary); padding: 1rem;">
                                 请添加您支持的设备
                             </div>
                         </div>
-                        <div style="font-size: 0.9rem; color: var(--accent); margin-top: 1rem;">
+                        <div style="font-size: 0.8rem; color: var(--mi-orange); margin-top: 0.5rem;">
                             <i class="fas fa-info-circle"></i> 请添加您用于支持的小米设备全名，每台设备请单独添加
                         </div>
                     </div>
                     
                     <div class="form-group full-width">
-                        <label><i class="fas fa-signature fresh-accent"></i> 电子签名 *</label>
+                        <label><i class="fas fa-signature mi-orange-accent"></i> 电子签名 *</label>
                         <div class="signature-pad-container">
                             <div class="signature-pad-wrapper">
                                 <canvas id="signatureCanvas" class="signature-pad"></canvas>
@@ -1302,8 +1371,8 @@
                             <div class="color-palette">
                                 <span><i class="fas fa-palette"></i></span>
                                 <div class="color-option active" style="background: #000000;" data-color="#000000"></div>
-                                <div class="color-option" style="background: var(--accent);" data-color="#ff6b6b"></div>
-                                <div class="color-option" style="background: var(--secondary);" data-color="#00c3ff"></div>
+                                <div class="color-option" style="background: var(--mi-orange);" data-color="#ff6900"></div>
+                                <div class="color-option" style="background: var(--mi-blue);" data-color="#00c3ff"></div>
                                 <div class="color-option" style="background: #4caf50;" data-color="#4caf50"></div>
                             </div>
                             <button type="button" class="btn btn-secondary" id="clearSignatureBtn">
@@ -1344,7 +1413,7 @@
     <div id="privacyModal" class="privacy-modal">
         <div class="privacy-modal-content">
             <div class="privacy-modal-header">
-                <h2 class="privacy-modal-title fresh-accent">隐私政策</h2>
+                <h2 class="privacy-modal-title">隐私政策</h2>
                 <button class="privacy-close" id="closePrivacyModal">&times;</button>
             </div>
             <div class="privacy-modal-body">
@@ -1375,7 +1444,7 @@
                 <h3>数据存储与安全</h3>
                 <p>您的数据将得到安全保护：</p>
                 <ul>
-                    <li><strong>存储位置</strong>：签名数据存储在GitHub Issues中，受GitHub安全保护</li>
+                    <li><strong>存储位置</strong>：签名数据存储在浏览器本地存储中</li>
                     <li><strong>本地存储</strong>：防刷时间戳存储在您的浏览器本地存储中</li>
                     <li><strong>传输安全</strong>：所有数据传输使用HTTPS加密</li>
                     <li><strong>访问控制</strong>：只有项目维护者可以访问原始数据</li>
@@ -1436,8 +1505,8 @@
                 <h3>联系我们</h3>
                 <p>如果您对本隐私政策有任何疑问或需要行使您的权利，请通过以下方式联系我们：</p>
                 <ul>
-                    <li><strong>GitHub</strong>：<a href="https://github.com/ziyi127" target="_blank" style="color: var(--secondary);">ziyi127</a></li>
-                    <li><strong>项目地址</strong>：<a href="https://github.com/ziyi127/xiaomi-bl-petition" target="_blank" style="color: var(--secondary);">Xiaomi BL Petition</a></li>
+                    <li><strong>GitHub</strong>：<a href="https://github.com/ziyi127" target="_blank" style="color: var(--mi-blue);">ziyi127</a></li>
+                    <li><strong>项目地址</strong>：<a href="https://github.com/ziyi127/xiaomi-bl-petition" target="_blank" style="color: var(--mi-blue);">Xiaomi BL Petition</a></li>
                     <li><strong>邮箱</strong>：通过GitHub联系</li>
                 </ul>
 
@@ -1450,7 +1519,7 @@
                     <li><strong>法律义务</strong>：遵守相关法律法规</li>
                 </ul>
 
-                <p style="margin-top: 2rem; font-style: italic; color: var(--light); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                <p style="margin-top: 2rem; font-style: italic; color: var(--text-secondary); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
                     生效日期: 2025年7月29日<br>
                     最后更新: 2025年7月29日
                 </p>
@@ -1493,11 +1562,11 @@
             // 设置画布尺寸
             const rect = container.getBoundingClientRect();
             canvas.width = rect.width * window.devicePixelRatio;
-            canvas.height = 200 * window.devicePixelRatio;
+            canvas.height = 150 * window.devicePixelRatio;
             
             // 设置CSS尺寸
             canvas.style.width = rect.width + 'px';
-            canvas.style.height = '200px';
+            canvas.style.height = '150px';
             
             const ctx = canvas.getContext('2d');
             
@@ -1510,7 +1579,7 @@
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width / window.devicePixelRatio, 200);
+            ctx.fillRect(0, 0, canvas.width / window.devicePixelRatio, 150);
             
             canvasCtx = ctx;
             hasDrawn = false; // 重置绘制状态
@@ -1532,8 +1601,8 @@
             }
             
             return {
-                x: clientX - rect.left,
-                y: clientY - rect.top
+                x: (clientX - rect.left) * (canvas.width / window.devicePixelRatio / rect.width),
+                y: (clientY - rect.top) * (150 / rect.height)
             };
         }
 
@@ -1619,7 +1688,7 @@
             const ctx = canvasCtx;
             if (ctx) {
                 ctx.fillStyle = 'white';
-                ctx.fillRect(0, 0, canvas.width / window.devicePixelRatio, 200);
+                ctx.fillRect(0, 0, canvas.width / window.devicePixelRatio, 150);
                 initCanvas();
             }
         }
@@ -1699,7 +1768,7 @@
             const deviceList = document.getElementById('deviceList');
             
             if (supportDevices.length === 0) {
-                deviceList.innerHTML = '<div style="text-align: center; color: var(--light); padding: 1.5rem;">请添加您支持的设备</div>';
+                deviceList.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 1rem;">请添加您支持的设备</div>';
                 return;
             }
             
@@ -1721,60 +1790,12 @@
         // 更新统计数字
         function updateStats() {
             document.getElementById('signatureCount').textContent = signatureCount;
-            // 计算支持设备总数（基于签名人数和平均设备数）
-            supportDeviceCount = Math.max(50, Math.floor(signatureCount * 1.5));
-            document.getElementById('supportCount').textContent = supportDeviceCount;
+            document.getElementById('supportCount').textContent = Math.max(50, Math.floor(signatureCount * 1.5));
             // 从2025年7月29日开始计算倡议天数
             const startDate = new Date('2025-07-29');
             const today = new Date();
             const daysDiff = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
             document.getElementById('daysCount').textContent = Math.max(0, daysDiff);
-        }
-
-        // 提交签名到GitHub Issues
-        async function submitSignatureToGitHub(signatureData) {
-            try {
-                // 创建GitHub Issue
-                const issueData = {
-                    title: `签名支持: ${signatureData.name}`,
-                    body: `
-## 签名信息
-- **姓名**: ${signatureData.name}
-- **邮箱**: ${signatureData.email || '未提供'}
-- **支持设备**: ${signatureData.devices.join(', ')}
-- **签名时间**: ${signatureData.date}
-
-## 电子签名
-![签名](${signatureData.signature})
-
----
-*此签名通过联合签名网站自动创建*
-                    `,
-                    labels: ['signature']
-                };
-
-                // 存储到本地存储（模拟GitHub Issues）
-                const newIssue = {
-                    id: Date.now(),
-                    number: signatures.length + 1,
-                    title: issueData.title,
-                    body: issueData.body,
-                    created_at: new Date().toISOString(),
-                    updated_at: new Date().toISOString(),
-                    state: 'open',
-                    labels: issueData.labels
-                };
-
-                // 添加到签名列表
-                signatures.push(newIssue);
-                signatureCount = signatures.length;
-                localStorage.setItem('xiaomiSignatures', JSON.stringify(signatures));
-                
-                return true;
-            } catch (error) {
-                console.error('提交到GitHub失败:', error);
-                return false;
-            }
         }
 
         // 提交签名
@@ -1815,7 +1836,7 @@
             }
 
             // 检查是否有绘制内容（更准确的检测）
-            const imageData = ctx.getImageData(0, 0, canvas.width / window.devicePixelRatio, 200);
+            const imageData = ctx.getImageData(0, 0, canvas.width / window.devicePixelRatio, 150);
             let hasDrawing = false;
             // 检查是否有非白色像素（除了边框）
             for (let i = 3; i < imageData.data.length; i += 4) {
@@ -1823,7 +1844,7 @@
                 const g = imageData.data[i + 1];
                 const b = imageData.data[i + 2];
                 const a = imageData.data[i + 3];
-                // 如果不是纯白色或不是完全透明，则认为有绘制内容
+                // 如果不是纯白色，则认为有绘制内容
                 if (r !== 255 || g !== 255 || b !== 255 || a !== 255) {
                     hasDrawing = true;
                     break;
@@ -1843,6 +1864,7 @@
                 
                 // 创建新签名对象
                 const newSignature = {
+                    id: Date.now(),
                     name: name,
                     email: email,
                     devices: devices,
@@ -1851,32 +1873,32 @@
                     timestamp: Date.now()
                 };
 
-                // 提交到GitHub
-                const success = await submitSignatureToGitHub(newSignature);
+                // 添加到数组
+                signatures.unshift(newSignature);
+                signatureCount = signatures.length;
                 
-                if (success) {
-                    // 记录签名时间（用于冷却）
-                    const now = Math.floor(Date.now() / 1000);
-                    localStorage.setItem('lastSignatureTime', now.toString());
-                    lastSignatureTime = now;
-                    
-                    // 清空设备列表
-                    supportDevices = [];
-                    updateDeviceList();
-                    
-                    // 更新UI
-                    updateStats();
-                    clearForm();
-                    
-                    showSignatureMessage('签名提交成功！感谢您的支持！', 'success');
-                    
-                    // 3秒后自动关闭模态框
-                    setTimeout(() => {
-                        closeSignatureModal();
-                    }, 3000);
-                } else {
-                    showSignatureMessage('提交失败，请稍后重试', 'error');
-                }
+                // 保存到本地存储
+                localStorage.setItem('xiaomiSignatures', JSON.stringify(signatures));
+                
+                // 记录签名时间（用于冷却）
+                const now = Math.floor(Date.now() / 1000);
+                localStorage.setItem('lastSignatureTime', now.toString());
+                lastSignatureTime = now;
+                
+                // 清空设备列表
+                supportDevices = [];
+                updateDeviceList();
+                
+                // 更新UI
+                updateStats();
+                clearForm();
+                
+                showSignatureMessage('签名提交成功！感谢您的支持！', 'success');
+                
+                // 3秒后自动关闭模态框
+                setTimeout(() => {
+                    closeSignatureModal();
+                }, 3000);
                 
             } catch (error) {
                 showSignatureMessage('提交失败，请稍后重试', 'error');
@@ -1898,67 +1920,44 @@
         // 加载签名列表到页面
         async function loadSignaturesToPage() {
             const container = document.getElementById('signaturesPageContainer');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div>正在加载签名列表...</div>';
-            
-            // 从本地存储获取签名数据
-            signatures = JSON.parse(localStorage.getItem('xiaomiSignatures') || '[]');
-            signatureCount = signatures.length;
-            totalPages = Math.ceil(signatureCount / SIGNATURES_PER_PAGE);
             
             if (signatures.length === 0) {
                 container.innerHTML = `
-                    <div class="premium-glass" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-                        <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 1.5rem; opacity: 0.5; color: var(--accent);"></i>
-                        <p style="font-size: 1.1rem;">暂无签名，成为第一个支持者吧！</p>
+                    <div class="glass-effect" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+                        <i class="fas fa-users" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5; color: var(--mi-orange);"></i>
+                        <p style="font-size: 0.9rem;">暂无签名，成为第一个支持者吧！</p>
                     </div>
                 `;
                 return;
             }
 
-            // 获取当前页的签名
-            const startIndex = (currentPage - 1) * SIGNATURES_PER_PAGE;
-            const endIndex = startIndex + SIGNATURES_PER_PAGE;
-            const currentSignatures = signatures.slice(startIndex, endIndex);
-            
             let html = '';
+            // 只显示最近的64个签名
+            const recentSignatures = signatures.slice(0, 64);
             
-            currentSignatures.forEach(signature => {
-                // 解析签名数据
-                const content = signature.body || '';
-                const nameMatch = content.match(/- \*\*姓名\*\*: (.+)/);
-                const emailMatch = content.match(/- \*\*邮箱\*\*: (.+)/);
-                const devicesMatch = content.match(/- \*\*支持设备\*\*: (.+)/);
-                const dateMatch = content.match(/- \*\*签名时间\*\*: (.+)/);
-                const signatureMatch = content.match(/!\[签名\]\((.+)\)/);
-                
-                const name = nameMatch ? nameMatch[1] : '匿名用户';
-                const email = emailMatch ? emailMatch[1] : '';
-                const devices = devicesMatch ? devicesMatch[1].split(',').map(d => d.trim()).filter(d => d) : [];
-                const date = dateMatch ? dateMatch[1] : new Date(signature.created_at).toLocaleString('zh-CN');
-                const signatureImage = signatureMatch ? signatureMatch[1] : '';
-                
+            recentSignatures.forEach(signature => {
                 // 生成设备标签
                 let devicesHtml = '';
-                if (devices.length > 0) {
-                    devices.forEach(device => {
+                if (signature.devices && signature.devices.length > 0) {
+                    signature.devices.forEach(device => {
                         devicesHtml += `<span class="device-tag">${device}</span>`;
                     });
                 }
                 
                 html += `
-                    <div class="signature-card premium-glass animate-fade-in">
+                    <div class="signature-card glass-effect animate-fade-in">
                         <div class="signature-name">
-                            <i class="fas fa-user fresh-accent"></i> ${name}
+                            <i class="fas fa-user mi-orange-accent"></i> ${signature.name}
                         </div>
                         <div class="signature-date">
-                            <i class="far fa-clock"></i> ${date}
+                            <i class="far fa-clock"></i> ${signature.date}
                         </div>
-                        ${devices.length > 0 ? `
+                        ${signature.devices && signature.devices.length > 0 ? `
                         <div class="signature-devices">
                             <i class="fas fa-mobile-alt"></i> 支持设备: ${devicesHtml}
                         </div>
                         ` : ''}
-                        <img src="${signatureImage}" alt="签名" class="signature-image" onerror="this.style.display='none'">
+                        <img src="${signature.signature}" alt="签名" class="signature-image" onerror="this.style.display='none'">
                     </div>
                 `;
             });
