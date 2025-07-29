@@ -1,0 +1,27 @@
+name: Issue Labeler
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  label_issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label signature issues
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue = context.payload.issue;
+            if (issue.title && issue.title.startsWith('签名支持:')) {
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  labels: ['signature']
+                });
+                console.log(`Added 'signature' label to issue #${issue.number}`);
+              } catch (error) {
+                console.error(`Failed to add label to issue #${issue.number}:`, error);
+              }
+            }
